@@ -31,6 +31,7 @@ public class gameManager : MonoBehaviour
     public ScoreCollector scorecollector;
     public Transform spawn;
     public Transform area;
+    float reward = 0.01f;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +61,8 @@ public class gameManager : MonoBehaviour
  
     public void Reset()
     {
-        agent.AddReward(-0.1f);
+        reward = 0.01f;
+        agent.AddReward(-0.01f);
         scorecollector.UpdateScore(maxheight);
         maxheight = -1.9f;
         prevheight = maxheight;
@@ -68,7 +70,7 @@ public class gameManager : MonoBehaviour
         state = State.playing;
         checkFixed = 0;
         reset = false;
-        mainCamera.transform.localPosition = new Vector3(0, 0, -15);
+        mainCamera.transform.localPosition = new Vector3(0, 3, -15);
         foreach (GameObject o in obj)
         {
             Destroy(o.gameObject);
@@ -95,6 +97,7 @@ public class gameManager : MonoBehaviour
 
         if (state == State.waiting) {
             GameWaiting();
+            cur.GetComponent<SpriteRenderer>().color = Color.white;
         }
         if (state == State.playing) {
             GamePlaying();
@@ -110,7 +113,9 @@ public class gameManager : MonoBehaviour
             checkFixed++;
             if (checkFixed > 20)
             {
-                agent.AddReward(1f);
+                
+                agent.AddReward(reward);
+                reward += 0.01f;
                 //Debug.Log(maxheight - prevheight + " :reward");
                 // agent.AddReward(maxheight - prevheight);
                 state = State.playing;
@@ -127,6 +132,7 @@ public class gameManager : MonoBehaviour
         Vector3 trans = new Vector3(translation, 0, 0);
         cur.transform.Rotate(r);
         cur.transform.Translate(trans, Space.World);
+        cur.GetComponent<SpriteRenderer>().color = Color.gray;
         BoundDetect(cur.transform);
     }
     

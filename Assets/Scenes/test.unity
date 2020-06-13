@@ -191,7 +191,12 @@ PrefabInstance:
     - target: {fileID: 7202324606982403239, guid: 8f84904513b744dc0adc8e1a23b3b8ad,
         type: 3}
       propertyPath: near clip plane
-      value: -12
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202324606982403239, guid: 8f84904513b744dc0adc8e1a23b3b8ad,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7202324608281646942, guid: 8f84904513b744dc0adc8e1a23b3b8ad,
         type: 3}
