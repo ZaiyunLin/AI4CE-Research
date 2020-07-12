@@ -27,8 +27,8 @@ public class AgentLogic : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(gm.maxheight);
-        sensor.AddObservation(transform);
+        //sensor.AddObservation(gm.maxheight);
+       // sensor.AddObservation(transform);
        
         //base.CollectObservations(sensor);
     }

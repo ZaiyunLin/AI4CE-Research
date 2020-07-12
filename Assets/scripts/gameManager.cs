@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
     public List<GameObject> obj = new List<GameObject>();
     //all primitive shape
     public Object[] prim;
+
     // current controlling or observing shape
     public GameObject cur;
 
@@ -40,6 +41,7 @@ public class gameManager : MonoBehaviour
     }
 
     public void Initialize() {
+      
         maxheight = -1.9f;
         prevheight = maxheight;
         prim = Resources.LoadAll("square", typeof(Object));
@@ -62,7 +64,7 @@ public class gameManager : MonoBehaviour
     public void Reset()
     {
         reward = 0.01f;
-        agent.AddReward(-0.01f);
+       
         scorecollector.UpdateScore(maxheight);
         maxheight = -1.9f;
         prevheight = maxheight;
@@ -89,7 +91,7 @@ public class gameManager : MonoBehaviour
 
         // DetectHeight();
         if (reset) {
-           
+            agent.AddReward(-0.01f);
             agent.EndEpisode();
             reset = false;
            }
@@ -139,6 +141,7 @@ public class gameManager : MonoBehaviour
 
     private void RandomGenerate() {
         int i = Random.Range(0, prim.Length);
+
         cur = Instantiate(prim[i],area)as GameObject;
 
         cur.transform.localPosition = new Vector3(Random.Range(-5,5), height, 0);
@@ -152,7 +155,7 @@ public class gameManager : MonoBehaviour
     void BoundDetect(Transform o) { 
         if(o.localPosition.x <-5 || o.localPosition.x > 5)
         {
-            o.localPosition = new Vector3(0, height, 0);
+            o.localPosition = new Vector3(Random.Range(-5, 5), height, 0);
         }
 
     }

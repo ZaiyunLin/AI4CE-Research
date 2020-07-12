@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -121,7 +121,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &1656080483
+--- !u!1001 &223915473
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -185,16 +185,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7202324606982403239, guid: 8f84904513b744dc0adc8e1a23b3b8ad,
         type: 3}
-      propertyPath: orthographic size
-      value: 5.6421103
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202324606982403239, guid: 8f84904513b744dc0adc8e1a23b3b8ad,
-        type: 3}
-      propertyPath: near clip plane
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202324606982403239, guid: 8f84904513b744dc0adc8e1a23b3b8ad,
-        type: 3}
       propertyPath: m_ClearFlags
       value: 2
       objectReference: {fileID: 0}
@@ -202,8 +192,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 2dbb06d6293054bafb2bf5bb23e171f7,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7207112669350948015, guid: 8f84904513b744dc0adc8e1a23b3b8ad,
         type: 3}
       propertyPath: m_Name
