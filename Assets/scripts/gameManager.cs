@@ -127,7 +127,7 @@ public class gameManager : MonoBehaviour
 
     void GameWaiting() {
 
-        agent.AddReward(-0.005f);
+       
         if (cur.GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1)
         {
            
@@ -147,6 +147,10 @@ public class gameManager : MonoBehaviour
                 UpdateSensorHeight();
             }
         }
+        else {
+            agent.AddReward(-0.005f);
+        }
+
     }
 
     void GamePlaying() {
