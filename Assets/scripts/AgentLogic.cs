@@ -7,11 +7,11 @@ using Unity.MLAgents.Sensors;
 
 public class AgentLogic : Agent
 {
-    gameManager gm;
+    public gameManager gm;
     // Start is called before the first frame update
     void Start()
     {
-        gm = GetComponent<gameManager>();
+       
         gm.Initialize();
     }
     private void Update()
@@ -28,7 +28,7 @@ public class AgentLogic : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         //sensor.AddObservation(gm.maxheight);
-       // sensor.AddObservation(transform);
+        sensor.AddObservation(gm.cur.transform);
        
         //base.CollectObservations(sensor);
     }

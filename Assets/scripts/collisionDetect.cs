@@ -13,6 +13,7 @@ public class collisionDetect : MonoBehaviour
     {
         if (collision.gameObject.tag == "shape")
         {
+
             gm.reset = true;
         }
     }

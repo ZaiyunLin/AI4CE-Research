@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - shape
+  - floor
+  - transparent
   layers:
   - Default
   - TransparentFX
