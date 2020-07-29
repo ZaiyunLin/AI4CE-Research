@@ -35,7 +35,7 @@ public class AgentLogic : Agent
     public override void OnActionReceived(float[] vectorAction)
 
     {
-
+        AddReward(-0.0001f);
         if (vectorAction[0] == 1)
         {
             gm.rotation = 1;
@@ -70,7 +70,7 @@ public class AgentLogic : Agent
     public override void Heuristic(float[] actionsOut)
     {
 
-
+        AddReward(-0.0001f);
         if (Input.GetKey(KeyCode.Space))
         {
             actionsOut[2] = 1;

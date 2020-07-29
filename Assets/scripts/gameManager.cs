@@ -59,7 +59,7 @@ public class gameManager : MonoBehaviour
 
         // DetectHeight();
         if (reset) {
-            agent.AddReward(-1f);
+            agent.AddReward(-1);
             agent.EndEpisode();
             reset = false;
         }
@@ -103,8 +103,8 @@ public class gameManager : MonoBehaviour
     public void Reset()
     {
 
-        reward = 0.1f;
-        scorecollector.UpdateScore(maxheight);
+        reward = 1;
+        //scorecollector.UpdateScore(maxheight);
         maxheight = -1.9f;
         prevheight = maxheight;
         height = 5;
@@ -136,10 +136,6 @@ public class gameManager : MonoBehaviour
             {
 
                 agent.AddReward(reward);
-                reward += 0.1f;
-                if (reward >= 1) {
-                    reward = 1;
-                }
                 state = State.playing;
                 checkFixed = 0;
                 prevheight = maxheight;
@@ -147,15 +143,12 @@ public class gameManager : MonoBehaviour
                 UpdateSensorHeight();
             }
         }
-        else {
-            agent.AddReward(-0.005f);
-        }
+
 
     }
 
     void GamePlaying() {
         agent.RequestDecision();
-        agent.AddReward(-0.005f);
         Vector3 r = new Vector3(0, 0, rotation);
         Vector3 trans = new Vector3(translation, 0, 0);
         cur.transform.Rotate(r);
@@ -167,10 +160,17 @@ public class gameManager : MonoBehaviour
 
     private void RandomGenerate() {
         int i = Random.Range(0, prim.Length);
-
+         float xpos;
         cur = Instantiate(prim[i], area) as GameObject;
+        int rdm = Random.Range(0,2);
+        if(rdm ==0){
+         xpos = Random.Range(-5.0f,-3.0f);
+        }else{
+         xpos = Random.Range(3.0f,5.0f);
+        }
 
-        cur.transform.localPosition = new Vector3(Random.Range(-5, 5), maxheight+1.9f+5, 0);
+        cur.transform.localPosition = new Vector3(xpos, maxheight+1.9f+5, 0);
+
         cur.transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
         var size = Random.Range(1, 2);
         cur.transform.localScale = new Vector3(size, size, 1);
@@ -180,9 +180,13 @@ public class gameManager : MonoBehaviour
 
     }
     void BoundDetect(Transform o) {
-        if (o.localPosition.x < -5 || o.localPosition.x > 5)
+        if (o.localPosition.x < -5 )
         {
-            o.localPosition = new Vector3(Random.Range(-5, 5), maxheight+1.9f +5, 0);
+            o.localPosition = new Vector3(-5, maxheight+1.9f +5, 0);
+        }
+          if (o.localPosition.x > 5)
+        {
+            o.localPosition = new Vector3(5, maxheight+1.9f +5, 0);
         }
 
     }
