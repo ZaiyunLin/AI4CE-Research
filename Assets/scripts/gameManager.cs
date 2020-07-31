@@ -40,6 +40,8 @@ public class gameManager : MonoBehaviour
     float rayheight1;
     float rayheight2;
     float reward = 0.2f;
+    public int maxPlaytime = 400;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,10 +70,12 @@ public class gameManager : MonoBehaviour
         if (state == State.waiting) {
             GameWaiting();
             cur.GetComponent<SpriteRenderer>().color = Color.white;
-
+            cur.tag ="shape";
+            
         }
         if (state == State.playing) {
-   
+            
+            cur.tag ="transparent";
             GamePlaying();
         }
 
@@ -102,7 +106,7 @@ public class gameManager : MonoBehaviour
 
     public void Reset()
     {
-
+        maxPlaytime = 400;
         reward = 1;
         //scorecollector.UpdateScore(maxheight);
         maxheight = -1.9f;
@@ -127,7 +131,7 @@ public class gameManager : MonoBehaviour
 
     void GameWaiting() {
 
-       
+        maxPlaytime = 400;
         if (cur.GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1)
         {
            
@@ -148,6 +152,11 @@ public class gameManager : MonoBehaviour
     }
 
     void GamePlaying() {
+        maxPlaytime--;
+        if(maxPlaytime==0){
+            reset = true;
+
+        }
         agent.RequestDecision();
         Vector3 r = new Vector3(0, 0, rotation);
         Vector3 trans = new Vector3(translation, 0, 0);

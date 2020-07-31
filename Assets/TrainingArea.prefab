@@ -625,6 +625,7 @@ MonoBehaviour:
   raySensor3: {fileID: 8424814254295747759}
   raySensor4: {fileID: 1699876919}
   raySensor5: {fileID: 199117803}
+  maxPlaytime: 400
 --- !u!1 &7207112669350948015
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +635,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4978315020914584057}
-  - component: {fileID: 3365932584379496615}
   - component: {fileID: 5853796089487530033}
   - component: {fileID: 2887752021683653487}
   - component: {fileID: 1112053981}
@@ -668,30 +668,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3365932584379496615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7207112669350948015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    VectorObservationSize: 9
-    NumStackedVectorObservations: 1
-    VectorActionSize: 030000000300000002000000
-    VectorActionDescriptions: []
-    VectorActionSpaceType: 0
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
-  m_BehaviorType: 0
-  m_BehaviorName: My Behavior
-  TeamId: 0
-  m_UseChildSensors: 1
 --- !u!114 &5853796089487530033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 5
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &2887752021683653487
 MonoBehaviour:
@@ -736,8 +712,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 9
-    NumStackedVectorObservations: 1
+    VectorObservationSize: 4
+    NumStackedVectorObservations: 8
     VectorActionSize: 030000000300000002000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0

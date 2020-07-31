@@ -28,14 +28,17 @@ public class AgentLogic : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         //sensor.AddObservation(gm.maxheight);
-        sensor.AddObservation(gm.cur.transform);
+        sensor.AddObservation(gm.cur.transform.position);
+        sensor.AddObservation(gm.cur.transform.rotation);
+        sensor.AddObservation(gm.maxPlaytime);
+        sensor.AddObservation(gm.maxheight);
        
         //base.CollectObservations(sensor);
     }
     public override void OnActionReceived(float[] vectorAction)
 
     {
-        AddReward(-0.0001f);
+        AddReward(-0.0005f);
         if (vectorAction[0] == 1)
         {
             gm.rotation = 1;
@@ -70,7 +73,7 @@ public class AgentLogic : Agent
     public override void Heuristic(float[] actionsOut)
     {
 
-        AddReward(-0.0001f);
+        AddReward(-0.0005f);
         if (Input.GetKey(KeyCode.Space))
         {
             actionsOut[2] = 1;
