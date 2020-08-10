@@ -77,10 +77,10 @@ MonoBehaviour:
   m_DetectableTags:
   - floor
   - shape
-  m_RaysPerDirection: 7
+  m_RaysPerDirection: 12
   m_MaxRayDegrees: 15
   m_SphereCastRadius: 0
-  m_RayLength: 20
+  m_RayLength: 23
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -134,8 +134,8 @@ MonoBehaviour:
   m_DetectableTags:
   - floor
   - shape
-  m_RaysPerDirection: 6
-  m_MaxRayDegrees: 1
+  m_RaysPerDirection: 12
+  m_MaxRayDegrees: 2
   m_SphereCastRadius: 0
   m_RayLength: 32
   m_RayLayerMask:
@@ -191,10 +191,10 @@ MonoBehaviour:
   m_DetectableTags:
   - floor
   - shape
-  m_RaysPerDirection: 7
+  m_RaysPerDirection: 12
   m_MaxRayDegrees: 15
   m_SphereCastRadius: 0
-  m_RayLength: 20
+  m_RayLength: 23
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -305,8 +305,8 @@ MonoBehaviour:
   m_DetectableTags:
   - floor
   - shape
-  m_RaysPerDirection: 6
-  m_MaxRayDegrees: 1
+  m_RaysPerDirection: 12
+  m_MaxRayDegrees: 2
   m_SphereCastRadius: 0
   m_RayLength: 32
   m_RayLayerMask:
@@ -615,7 +615,7 @@ MonoBehaviour:
   maxheight: 0
   heightDetect: {fileID: 0}
   mainCamera: {fileID: 7202324606982403239}
-  angularDrag: 2
+  angularDrag: 5
   agent: {fileID: 2887752021683653487}
   scorecollector: {fileID: 0}
   spawn: {fileID: 178505894}
@@ -712,7 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 4
+    VectorObservationSize: 9
     NumStackedVectorObservations: 8
     VectorActionSize: 030000000300000002000000
     VectorActionDescriptions: []

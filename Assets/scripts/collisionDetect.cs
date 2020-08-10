@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class collisionDetect : MonoBehaviour
 {
-    public gameManager gm;
+   // public gameManager gm;
+    public GameManagerCamera gm;
     private void Start()
     {
 

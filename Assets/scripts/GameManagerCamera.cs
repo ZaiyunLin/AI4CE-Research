@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gameManager : MonoBehaviour
+public class GameManagerCamera : MonoBehaviour
 {
     public float rotate;
     public enum State { playing, waiting };
@@ -24,30 +24,23 @@ public class gameManager : MonoBehaviour
     public float height;
     public float maxheight;
     float prevheight;
-    public Transform heightDetect;
+
     public Camera mainCamera = null;
     public float angularDrag = 3;
 
     public AgentLogic agent;
-    public ScoreCollector scorecollector;
+   
     public Transform spawn;
     public Transform area;
-    public Transform raySensor1;
-    public Transform raySensor2;
-    public Transform raySensor3;
-    public Transform raySensor4;
-    public Transform raySensor5;
-    float rayheight1;
-    float rayheight2;
-    float reward = 0.2f;
+  
+     float reward = 0.2f;
     public int maxPlaytime = 400;
+    //finish detecting height;    
+    public bool detfin;
 
     // Start is called before the first frame update
     void Start()
     {
-        rayheight1 = raySensor1.localPosition.y;
-        rayheight2 = raySensor4.position.y;
-
 
     }
 
@@ -83,10 +76,10 @@ public class gameManager : MonoBehaviour
 
     public void Initialize()
     {
-
+        detfin=false;
         maxheight = -1.9f;
         prevheight = maxheight;
-        prim = Resources.LoadAll("prefabs", typeof(Object));
+        prim = Resources.LoadAll("square", typeof(Object));
         state = State.playing;
         checkFixed = 0;
         reset = false;
@@ -105,7 +98,8 @@ public class gameManager : MonoBehaviour
 
 
     public void Reset()
-    {
+    {   
+        detfin=false;
         maxPlaytime = 400;
         reward = 1;
         //scorecollector.UpdateScore(maxheight);
@@ -130,13 +124,13 @@ public class gameManager : MonoBehaviour
     }
 
     void GameWaiting() {
-
+        
         maxPlaytime = 400;
         if (cur.GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1)
         {
            
             checkFixed++;
-            if (checkFixed > 20)
+            if (checkFixed > 20&&detfin)
             {
 
                 agent.AddReward(reward);
@@ -144,7 +138,7 @@ public class gameManager : MonoBehaviour
                 checkFixed = 0;
                 prevheight = maxheight;
                 RandomGenerate();
-                UpdateSensorHeight();
+   
             }
         }
 
@@ -152,6 +146,7 @@ public class gameManager : MonoBehaviour
     }
 
     void GamePlaying() {
+        detfin=false;
         maxPlaytime--;
         if(maxPlaytime==0){
             reset = true;
@@ -178,7 +173,7 @@ public class gameManager : MonoBehaviour
          xpos = Random.Range(3.0f,5.0f);
         }
 
-        cur.transform.localPosition = new Vector3(xpos, maxheight+1.9f+5, 0);
+        cur.transform.localPosition = new Vector3(xpos, maxheight+1.9f+4, 0);
 
         cur.transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
         var size = Random.Range(1, 2);
@@ -191,11 +186,11 @@ public class gameManager : MonoBehaviour
     void BoundDetect(Transform o) {
         if (o.localPosition.x < -5 )
         {
-            o.localPosition = new Vector3(-5, maxheight+1.9f +5, 0);
+            o.localPosition = new Vector3(-5, maxheight+1.9f+4, 0);
         }
           if (o.localPosition.x > 5)
         {
-            o.localPosition = new Vector3(5, maxheight+1.9f +5, 0);
+            o.localPosition = new Vector3(5, maxheight+1.9f +4, 0);
         }
 
     }
@@ -203,25 +198,20 @@ public class gameManager : MonoBehaviour
     void Raycast()
     {
         RaycastHit2D hit = Physics2D.Raycast(area.position + new Vector3(7, maxheight), Vector2.left, 15);
-
-        if (hit.collider != null && hit.transform.gameObject != cur) {
-            maxheight += 0.1f;
-        }
-
-
+        
+            if (hit.collider != null && hit.transform.gameObject != cur) {    
+                maxheight += 0.1f;
+                detfin = false;
+            }
+            detfin = true;
+        
         Debug.DrawRay(area.position + new Vector3(7, maxheight), Vector2.left * 15);
     }
 
     void UpdateHeight() {
         height = maxheight + 5+ 1.9f;
         spawn.localPosition = new Vector3(0, maxheight+3 +1.9f, 0);
-        raySensor1.localPosition = new Vector3(0, maxheight +1.9f + 9, 0);
-        raySensor2.localPosition = new Vector3(5, maxheight + 1.9f + 9, 0);
-        raySensor3.localPosition = new Vector3(-5, maxheight + 1.9f + 9, 0);
-        raySensor4.localPosition = new Vector3(-9.5f, maxheight + 1.9f + 1.25f, 0);
-        raySensor5.localPosition = new Vector3(9.5f, maxheight + 1.9f + 1.25f, 0);
-
-
+     
         if (maxheight > 2) {
             mainCamera.transform.localPosition = new Vector3(0, maxheight + 3 - 1.9f, -12);
         }
@@ -229,51 +219,6 @@ public class gameManager : MonoBehaviour
 
       
     }
-    void UpdateSensorHeight()
-    {
-        Vector3 pos = raySensor1.localPosition;
-        pos.y += maxheight+1.9f;
-        raySensor1.localPosition = pos;
-
-        pos = raySensor2.position;
-        pos.y += maxheight + 1.9f;
-        raySensor2.position = pos;
-
-        pos = raySensor3.position;
-        pos.y += maxheight + 1.9f;
-        raySensor3.position = pos;
-
-        pos = raySensor4.position;
-        pos.y += maxheight + 1.9f;
-        raySensor4.position = pos;
-
-        pos = raySensor5.position;
-        pos.y += maxheight + 1.9f;
-        raySensor5.position = pos;
-    }
-    void ResetSensorHeight() {
-
-        Vector3 pos = raySensor1.localPosition;
-        pos.y = rayheight1;
-        raySensor1.localPosition = pos;
-
-        pos = raySensor2.position;
-        pos.y = rayheight1;
-        raySensor2.position = pos;
-
-        pos = raySensor3.position;
-        pos.y = rayheight1;
-        raySensor3.position = pos;
-
-        pos = raySensor4.position;
-        pos.y = rayheight2;
-        raySensor4.position = pos;
-
-        pos = raySensor5.position;
-        pos.y = rayheight2;
-        raySensor5.position = pos;
-    }
-
 
 
 }
