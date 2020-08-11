@@ -1,0 +1,110 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
+
+
+public class SelfPlayAgent : Agent
+{
+    public SelfPlayGM gm;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        gm.Initialize();
+    }
+    private void Update()
+    {
+
+    }
+
+    // Update is called once per frame
+    public override void OnEpisodeBegin()
+    {
+        gm.Reset();
+        //base.OnEpisodeBegin();
+    }
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        //sensor.AddObservation(gm.maxheight);
+        sensor.AddObservation(gm.cur.transform.position);
+        sensor.AddObservation(gm.cur.transform.rotation);
+        sensor.AddObservation(gm.maxPlaytime);
+        sensor.AddObservation(gm.maxheight);
+
+        //base.CollectObservations(sensor);
+    }
+    public override void OnActionReceived(float[] vectorAction)
+
+    {
+        if (vectorAction[0] == 1)
+        {
+            gm.rotation = 1;
+        }
+        else if (vectorAction[0] == 2)
+        {
+            gm.rotation = -1;
+        }
+        else
+        {
+            gm.rotation = 0;
+        }
+        if (vectorAction[1] == 2)
+        {
+            gm.translation = -0.05f;
+        }
+        else if (vectorAction[1] == 1)
+        {
+            gm.translation = 0.05f;
+        }
+        else
+        {
+            gm.translation = 0;
+        }
+        if (vectorAction[2] == 1)
+        {
+
+            gm.ObjectRelease();
+        }
+
+    }
+    public override void Heuristic(float[] actionsOut)
+    {
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            actionsOut[2] = 1;
+        }
+        else
+        {
+            actionsOut[2] = 0;
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+
+            actionsOut[1] = 2;
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            actionsOut[1] = 1;
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            actionsOut[0] = 1;
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            actionsOut[0] = 2;
+        }
+        if (!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
+        {
+            actionsOut[1] = 0;
+        }
+        if (!(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
+        {
+            actionsOut[0] = 0;
+        }
+
+    }
+}
