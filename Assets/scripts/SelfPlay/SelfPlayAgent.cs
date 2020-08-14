@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
-
+using Unity.MLAgents.Policies;
 
 public class SelfPlayAgent : Agent
 {
     public SelfPlayGM gm;
+    public int team;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,10 @@ public class SelfPlayAgent : Agent
 
     }
 
+    public override void Initialize() {
+        BehaviorParameters m_BehaviorParameters = gameObject.GetComponent<BehaviorParameters>();
+        team = m_BehaviorParameters.TeamId;
+    }
     // Update is called once per frame
     public override void OnEpisodeBegin()
     {
@@ -40,31 +45,22 @@ public class SelfPlayAgent : Agent
     {
         if (vectorAction[0] == 1)
         {
-            gm.rotation = 1;
+            gm.ObjectRotate(45);
         }
         else if (vectorAction[0] == 2)
         {
-            gm.rotation = -1;
-        }
-        else
-        {
-            gm.rotation = 0;
+            gm.ObjectRotate(-45);
         }
         if (vectorAction[1] == 2)
         {
-            gm.translation = -0.05f;
+            gm.ObjectMovement(-0.05f);
         }
         else if (vectorAction[1] == 1)
         {
-            gm.translation = 0.05f;
-        }
-        else
-        {
-            gm.translation = 0;
+            gm.ObjectMovement(0.05f);
         }
         if (vectorAction[2] == 1)
         {
-
             gm.ObjectRelease();
         }
 
@@ -91,10 +87,12 @@ public class SelfPlayAgent : Agent
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
+            Debug.Log("up");
             actionsOut[0] = 1;
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
+            Debug.Log("down");
             actionsOut[0] = 2;
         }
         if (!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))

@@ -30,6 +30,7 @@ public class SelfPlayGM : MonoBehaviour
 
     public List<SelfPlayAgent> agents;
     public int curragent;
+    public int defeatedTeam;
 
     public Transform spawn;
     public Transform area;
@@ -57,8 +58,12 @@ public class SelfPlayGM : MonoBehaviour
         // DetectHeight();
         if (reset)
         {
-            OnScoreCount();
             foreach (SelfPlayAgent a in agents) {
+                if (a.team == defeatedTeam)
+                {
+                    a.AddReward(-1);
+                }
+                else a.AddReward(1);
                 a.EndEpisode();
             }
             
@@ -123,7 +128,6 @@ public class SelfPlayGM : MonoBehaviour
         mainCamera.transform.localPosition = new Vector3(0, 3, -12);
         foreach (GameObject o in obj)
         {
-            Debug.Log("destroy");
             Destroy(o.gameObject);
         }
         obj = new List<GameObject>();
@@ -134,11 +138,6 @@ public class SelfPlayGM : MonoBehaviour
 
     }
 
-    void OnScoreCount() {
-        agents[curragent].AddReward(-1);
-        if (curragent == 0) agents[1].AddReward(1);
-        if (curragent == 1) agents[0].AddReward(1);
-    }
 
     void GameWaiting()
     {
@@ -153,7 +152,7 @@ public class SelfPlayGM : MonoBehaviour
                 state = State.playing;
                 checkFixed = 0;
                 prevheight = maxheight;
-
+                agents[curragent].AddReward(reward);
                 if (curragent == 0) curragent = 1;
                 else if (curragent == 1) curragent = 0;
                 RandomGenerate();
@@ -169,17 +168,31 @@ public class SelfPlayGM : MonoBehaviour
         maxPlaytime--;
         if (maxPlaytime == 0)
         {
+            defeatedTeam = curragent;
             reset = true;
 
         }
-        Debug.Log(agents[curragent]);
         agents[curragent].RequestDecision();
-        Vector3 r = new Vector3(0, 0, rotation);
-        Vector3 trans = new Vector3(translation, 0, 0);
-        cur.transform.Rotate(r);
-        cur.transform.Translate(trans, Space.World);
         cur.GetComponent<SpriteRenderer>().color = Color.gray;
         BoundDetect(cur.transform);
+    }
+
+    public void ObjectRotate(int rotation) {
+        if (state == State.playing) {
+            Vector3 r = new Vector3(0, 0, rotation);
+            cur.transform.Rotate(r);
+        }
+        return;
+    }
+
+    public void ObjectMovement(float translation)
+    {
+        if (state == State.playing)
+        {
+            Vector3 trans = new Vector3(translation, 0, 0);
+            cur.transform.Translate(trans, Space.World);
+        }
+        return;
     }
 
 
@@ -200,7 +213,7 @@ public class SelfPlayGM : MonoBehaviour
 
         cur.transform.localPosition = new Vector3(xpos, maxheight + 1.9f + 4, 0);
 
-        cur.transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+        cur.transform.eulerAngles = new Vector3(0, 0, Random.Range(1, 9) * 45);
         var size = Random.Range(1, 2);
         cur.transform.localScale = new Vector3(size, size, 1);
         cur.GetComponent<Rigidbody2D>().angularDrag = angularDrag;
