@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6526148918227332764
 Transform:
   m_ObjectHideFlags: 0
@@ -138,8 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 8968007083775112130}
   m_SensorName: CameraSensor
-  m_Width: 256
-  m_Height: 266
+  m_Width: 88
+  m_Height: 88
   m_Grayscale: 1
   m_Compression: 1
 --- !u!114 &3095267778957028822
@@ -170,6 +170,9 @@ MonoBehaviour:
   spawn: {fileID: 2271801028045459395}
   area: {fileID: 6526148918227332764}
   maxPlaytime: 400
+  detfin: 0
+  minX: 3
+  maxX: 5
 --- !u!1 &8968007083419455096
 GameObject:
   m_ObjectHideFlags: 0

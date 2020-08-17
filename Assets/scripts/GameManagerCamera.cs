@@ -38,6 +38,8 @@ public class GameManagerCamera : MonoBehaviour
     //finish detecting height;    
     public bool detfin;
 
+    public float minX;
+    public float maxX;
     // Start is called before the first frame update
     void Start()
     {
@@ -168,9 +170,9 @@ public class GameManagerCamera : MonoBehaviour
         cur = Instantiate(prim[i], area) as GameObject;
         int rdm = Random.Range(0,2);
         if(rdm ==0){
-         xpos = Random.Range(-5.0f,-3.0f);
+         xpos = Random.Range(-maxX,-minX);
         }else{
-         xpos = Random.Range(3.0f,5.0f);
+         xpos = Random.Range(minX,maxX);
         }
 
         cur.transform.localPosition = new Vector3(xpos, maxheight+1.9f+4, 0);
