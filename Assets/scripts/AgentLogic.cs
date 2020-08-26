@@ -43,28 +43,26 @@ public class AgentLogic : Agent
         {
             gm.rotation = 1;
         }
-        else if (vectorAction[0] == 2)
+         if (vectorAction[0] == 2)
         {
             gm.rotation = -1;
         }
         // no rotate/ no move / no release
-         else if (vectorAction[0] ==0)
+        if (vectorAction[0] ==0)
         {
             gm.rotation = 0;
             gm.translation = 0;
         }
-        else if (vectorAction[0] == 3)
+         if (vectorAction[0] == 3)
         {
             gm.translation = -0.05f;
         }
-        else if (vectorAction[0] == 4)
+         if (vectorAction[0] == 4)
         {
             gm.translation = 0.05f;
         }
-
-       else if (vectorAction[0] == 5)
+        if (vectorAction[0] == 5)
         {
-
             gm.ObjectRelease();
         }
 
