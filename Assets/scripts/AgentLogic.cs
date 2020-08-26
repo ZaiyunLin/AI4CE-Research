@@ -28,10 +28,10 @@ public class AgentLogic : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         //sensor.AddObservation(gm.maxheight);
-        sensor.AddObservation(gm.cur.transform.position);
-        sensor.AddObservation(gm.cur.transform.rotation);
-        sensor.AddObservation(gm.maxPlaytime);
-        sensor.AddObservation(gm.maxheight);
+        //sensor.AddObservation(gm.cur.transform.position);
+        //sensor.AddObservation(gm.cur.transform.rotation);
+        //sensor.AddObservation(gm.maxPlaytime);
+        //sensor.AddObservation(gm.maxheight);
        
         //base.CollectObservations(sensor);
     }
@@ -47,23 +47,22 @@ public class AgentLogic : Agent
         {
             gm.rotation = -1;
         }
-        else
+        // no rotate/ no move / no release
+         else if (vectorAction[0] ==0)
         {
             gm.rotation = 0;
+            gm.translation = 0;
         }
-        if (vectorAction[1] == 2)
+        else if (vectorAction[0] == 3)
         {
             gm.translation = -0.05f;
         }
-        else if (vectorAction[1] == 1)
+        else if (vectorAction[0] == 4)
         {
             gm.translation = 0.05f;
         }
-        else
-        {
-            gm.translation = 0;
-        }
-        if (vectorAction[2] == 1)
+
+       else if (vectorAction[0] == 5)
         {
 
             gm.ObjectRelease();

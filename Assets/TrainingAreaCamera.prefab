@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 9
-    NumStackedVectorObservations: 8
+    VectorObservationSize: 0
+    NumStackedVectorObservations: 1
     VectorActionSize: 030000000300000002000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
@@ -138,8 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 8968007083775112130}
   m_SensorName: CameraSensor
-  m_Width: 256
-  m_Height: 266
+  m_Width: 88
+  m_Height: 88
   m_Grayscale: 1
   m_Compression: 1
 --- !u!114 &3095267778957028822
@@ -165,11 +165,12 @@ MonoBehaviour:
   height: 5
   maxheight: -1.9
   mainCamera: {fileID: 8968007083775112130}
-  angularDrag: 3
+  angularDrag: 5
   agent: {fileID: 4004920348338899978}
   spawn: {fileID: 2271801028045459395}
   area: {fileID: 6526148918227332764}
   maxPlaytime: 400
+  detfin: 0
 --- !u!1 &8968007083419455096
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +364,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
