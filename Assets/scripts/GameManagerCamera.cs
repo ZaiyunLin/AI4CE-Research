@@ -54,7 +54,7 @@ public class GameManagerCamera : MonoBehaviour
 
         // DetectHeight();
         if (reset) {
-            agent.AddReward(-1);
+    
             agent.EndEpisode();
             reset = false;
         }

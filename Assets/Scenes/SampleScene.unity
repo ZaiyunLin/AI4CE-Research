@@ -197,16 +197,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2271801029000372152, guid: 5cad5865a7bdbb24ab27cc15aa2f7350,
-        type: 3}
-      propertyPath: m_BrainParameters.VectorActionSize.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2271801029000372152, guid: 5cad5865a7bdbb24ab27cc15aa2f7350,
-        type: 3}
-      propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 6526148918227332764, guid: 5cad5865a7bdbb24ab27cc15aa2f7350,
         type: 3}
       propertyPath: m_LocalPosition.x
